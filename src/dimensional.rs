@@ -23,11 +23,6 @@ impl<T: Dimension, const N: usize> Dimension for Multi<T, N> {
 	const DIMS: usize = T::DIMS + 1;
 }
 
-struct Mathable<T, Dim: Dimension> {
-	inner: ICEAvoider<T, { Dim::MUL }>,
-	marker: PhantomData<Dim>,
-}
-
 struct ICEAvoider<T, const N: usize> {
 	inner: [T; N],
 }

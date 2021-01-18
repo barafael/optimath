@@ -104,7 +104,7 @@ impl<T, const N: usize> Iterator for IntoIter<T, N> {
 		if self.pos == N {
 			None
 		} else {
-			let out = unsafe { self.data.get_unchecked(self.pos).read() };
+			let out = unsafe { self.data.get_unchecked(self.pos).assume_init_read() };
 			self.pos += 1;
 			Some(out)
 		}
@@ -116,7 +116,7 @@ impl<T, const N: usize> Drop for IntoIter<T, N> {
 		let range = self.pos..N;
 		for offset in range {
 			self.pos = offset;
-			unsafe { self.data.get_unchecked(self.pos).read() };
+			unsafe { self.data.get_unchecked(self.pos).assume_init_read() };
 		}
 	}
 }

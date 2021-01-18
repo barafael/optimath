@@ -17,7 +17,7 @@ where
 	&'a T: core::ops::Mul<&'b T, Output = T>,
 	T: core::iter::Sum,
 {
-	pub default fn matrix_multiply<const O: usize>(
+	pub fn matrix_multiply<const O: usize>(
 		&'a self,
 		other: &'b Matrix<T, N, O>,
 	) -> Matrix<T, M, O> {
@@ -46,7 +46,7 @@ where
 	&'a T: core::ops::Mul<&'b T, Output = T>,
 	T: core::iter::Sum,
 {
-	pub default fn dot(self, other: &'b Vector<T, M>) -> T { (self * other).into_iter().sum() }
+	pub fn dot(self, other: &'b Vector<T, M>) -> T { (self * other).into_iter().sum() }
 }
 
 impl<'a, 'b, T: 'a + 'b, const M: usize> Vector<T, M>
@@ -54,7 +54,7 @@ where
 	&'a T: core::ops::Mul<&'b T, Output = T>,
 	T: core::iter::Sum,
 {
-	pub default fn dot(&'a self, other: &'b Vector<T, M>) -> T { (self * other).into_iter().sum() }
+	pub fn dot(&'a self, other: &'b Vector<T, M>) -> T { (self * other).into_iter().sum() }
 }
 
 #[test]
